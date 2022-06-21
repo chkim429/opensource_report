@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
+import csv
 
 browser = webdriver.Chrome('C:/chromedriver.exe')
 browser.get('https://www.naver.com')
@@ -27,6 +28,12 @@ while True:
     last_height = new_height
     
     
+f= open(r"C:\Users\User\Desktop\image_crwaling\크롤링\crawling.csv", 'w', encoding='utf-8-sig', newline='')    
+
+writercsv = csv.writer(f)
+    
+    
+    
 mearchs = browser.find_elements_by_css_selector(".basicList_info_area__17Xyo")
 
 for mearch in mearchs:
@@ -35,3 +42,7 @@ for mearch in mearchs:
     link = mearch.find_element_by_css_selector(".basicList_title__3P9Q7 > a").get_attribute('href')
     
     print(name,price,link)
+    
+    writercsv.writerow([name,price,link])
+    
+f.close()
